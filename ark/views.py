@@ -9,7 +9,7 @@ class AllAvaliableEvents(generic.ListView):
     model = Event
     template_name = 'list.html'
     context_object_name = 'events'
-    queryset = Event.objects.filter(released_at__release_status='released')
+    queryset = Event.objects.filter(release_events__release_status='released')
 
     def get_queryset(self):
         return self.queryset
