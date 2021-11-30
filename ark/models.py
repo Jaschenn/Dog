@@ -2,9 +2,15 @@ from django.db import models
 
 
 # Create your models here.
+class Media(models.Model):
+    media_name = models.CharField(max_length=200)
+    media_content = models.ImageField(blank=True, null=True)
+
+
 class Page(models.Model):
     page_name = models.CharField(max_length=200)
     technology_stack_name = models.CharField(max_length=200)
+    page_screenshot = models.ForeignKey(Media, on_delete=models.CASCADE, blank=True, null=True)
 
     def __str__(self):
         return self.page_name
