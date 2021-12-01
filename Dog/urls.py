@@ -20,3 +20,8 @@ urlpatterns = [
     path('', include('ark.urls')),
     path('admin/', admin.site.urls),
 ]
+admin.site.site_header = 'Lending 埋点系统'
+admin.site.index_title = '我在浏览器标签前面'
+admin.site.index_title = '我在浏览器标签前面'
+admin.site.site_header = "Lending埋点管理"
+admin.site.site_title = 'Lending埋点管理'

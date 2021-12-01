@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-uk*x1d)c5t%kbcmnotokwr0dd3=bg7g8_=(s$2k@i0zf1=@!ji
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -128,3 +128,4 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SIMPLEUI_HOME_INFO = False  # 关闭simpleui的home的info提示
+SIMPLEUI_LOGO = 'https://i.bmp.ovh/imgs/2021/12/9c9913bb08605284.png'

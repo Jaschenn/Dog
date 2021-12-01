@@ -27,17 +27,27 @@ class EventInline(admin.TabularInline):
 class EventAdmin(admin.ModelAdmin):
     list_filter = ['location', 'target', VersionFilter]
     list_display_links = []
-    list_display = ['action', 'location', 'target', 'extra']
+    list_display = [
+        'action',
+        'location',
+        'target',
+        'extra',
+    ]
     search_fields = ['location__page_name', 'extra']
     fk_fields = ['location_id']
     inlines = [EventInline, ]
-    #autocomplete_fields = ['action', 'location', 'target']
+    # autocomplete_fields = ['action', 'location', 'target']
     list_editable = ['extra', 'location']
     list_per_page = 20
 
 
 class ReleaseAdmin(admin.ModelAdmin):
     filter_horizontal = ['release_pages', 'release_events']
+
+    def formfield_for_manytomany(self, db_field, request, **kwargs):
+        if db_field.name == "release_events":
+            kwargs["queryset"] = Event.objects.filter(release_events__release_status='draft')
+        return super(ReleaseAdmin, self).formfield_for_foreignkey(db_field, request, **kwargs)
 
 
 admin.site.register(Page)

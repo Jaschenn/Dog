@@ -46,8 +46,13 @@ class Event(models.Model):
 
 
 class Release(models.Model):
+    release_status_choices = (
+        ('draft', 'draft'),
+        ('pre-release', 'pre-release'),
+        ('released', 'released')
+    )
     release_datetime = models.DateTimeField()
-    release_status = models.CharField(max_length=200)  # draft, pre-release, released
+    release_status = models.CharField(max_length=200, choices=release_status_choices)  # draft, pre-release, released
     release_version = models.ForeignKey(Version, on_delete=models.CASCADE, null=True, blank=True)
     release_pages = models.ManyToManyField(Page, blank=True, related_name='release_pages')
     release_events = models.ManyToManyField(Event, blank=True, related_name='release_events')
