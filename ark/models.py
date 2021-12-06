@@ -61,3 +61,16 @@ class Release(models.Model):
         return self.release_status + '_' + self.release_datetime.strftime('%m/%d/%Y_%H:%M:%S')
 
 
+class ReservedWord(models.Model):
+    key_data_type_choices = (
+        ('Int', 'Int'),
+        ('String', 'String'),
+        ('DateTime', 'DateTime'),
+        ('raw', 'raw')
+    )
+    key_name = models.CharField(max_length=200)
+    key_data_type = models.CharField(max_length=200, choices=key_data_type_choices)
+
+    def __str__(self):
+        return f'{self.key_name}: [{self.key_data_type}]'
+

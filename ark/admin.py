@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Page, Event, Action, Release, Version, Media
+from .models import Page, Event, Action, Release, Version, Media, ReservedWord
 
 
 class VersionFilter(admin.SimpleListFilter):
@@ -42,7 +42,11 @@ class EventAdmin(admin.ModelAdmin):
 
 
 class ReleaseAdmin(admin.ModelAdmin):
+    list_display = ['release_datetime', 'release_status', 'affected_pages']
     filter_horizontal = ['release_pages', 'release_events']
+
+    def affected_pages(self, obj):
+        return [i.page_name for i in obj.release_pages.all()]
 
     def formfield_for_manytomany(self, db_field, request, **kwargs):
         if db_field.name == "release_events":
@@ -56,3 +60,5 @@ admin.site.register(Action)
 admin.site.register(Release, ReleaseAdmin)
 admin.site.register(Version)
 admin.site.register(Media)
+admin.site.register(ReservedWord)
+
